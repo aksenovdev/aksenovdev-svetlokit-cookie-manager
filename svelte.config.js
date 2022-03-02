@@ -1,6 +1,8 @@
 import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
 
+export const TEMP_PACKAGE_PATH = './temp-package';
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
@@ -9,7 +11,7 @@ const config = {
 
 	kit: {
 		package: {
-			dir: './temp-package',
+			dir: TEMP_PACKAGE_PATH,
 		},
 		adapter: adapter(),
 	}
