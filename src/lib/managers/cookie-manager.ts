@@ -50,7 +50,7 @@ export interface CookieOptions {
 }
 
 export class CookieManager<Options = CookieOptions> {
-    private static adapters: Map<string, CookieAdapter> = new Map();
+    private static adapters: Map<string, Map<CookieAdapterCtor<any>, CookieAdapter>> = new Map();
 
     protected cookies: Map<string, string> = new Map();
 
@@ -72,8 +72,14 @@ export class CookieManager<Options = CookieOptions> {
 
     public getAdapter<T extends CookieAdapter<any>>(ctor: CookieAdapterCtor<T>, name: string, defaultValue?: any): T {
         const key: string = `${name}:${ctor.name}`;
-        const adapter: CookieAdapter = CookieManager.adapters.get(key)
-            || CookieManager.adapters.set(key, new ctor(name, this)).get(key);
+        const adapters: Map<CookieAdapterCtor<any>, CookieAdapter> = CookieManager.adapters.get(key)
+            || new Map();
+        if (!adapters.has(ctor)) {
+            adapters.set(ctor, new ctor(name, this));
+            CookieManager.adapters.set(key, adapters);
+        }
+
+        const adapter: CookieAdapter = adapters.get(ctor);
         if (defaultValue !== null && defaultValue !== undefined && !this.cookies.has(adapter.name)) {
             adapter.update(defaultValue);
         }
