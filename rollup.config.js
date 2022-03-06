@@ -8,11 +8,11 @@ import { terser } from 'rollup-plugin-terser';
 
 export default args => {
     const TEMP_PACKAGE_PATH =  Array.isArray(args.input) ? args.input[0] : args.input;
-    const inTempPackageDir = (...paths) => join(TEMP_PACKAGE_PATH, ...paths);
+    const inTempPackageDir = (...paths) => `${TEMP_PACKAGE_PATH}/${paths.join('/')}`;
     delete args.input;
 
     const PACKAGE_PATH = Array.isArray(args.output) ? args.output[0] : args.output;
-    const inPackageDir = (...paths) => join(PACKAGE_PATH, ...paths);
+    const inPackageDir = (...paths) => `${PACKAGE_PATH}/${paths.join('/')}`;
     delete args.output;
 
     return [
@@ -28,8 +28,8 @@ export default args => {
                 resolve(),
                 copy({
                     targets: [
-                    { src: inTempPackageDir('package.json'), dest: PACKAGE_PATH },
-                    { src: inTempPackageDir('README.md'), dest: PACKAGE_PATH },
+                        { src: inTempPackageDir('package.json'), dest: PACKAGE_PATH },
+                        { src: inTempPackageDir('README.md'), dest: PACKAGE_PATH },
                     ]
                 }),
                 terser()
