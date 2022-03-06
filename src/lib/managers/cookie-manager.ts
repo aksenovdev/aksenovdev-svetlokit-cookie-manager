@@ -49,6 +49,13 @@ export interface CookieOptions {
     [property: string]: any;
 }
 
+/**
+ * Manager for {@link CookieAdapter}
+ *
+ * @export
+ * @class CookieManager
+ * @template Options
+ */
 export class CookieManager<Options = CookieOptions> {
     private static adapters: Map<string, Map<CookieAdapterCtor<any>, CookieAdapter>> = new Map();
 

@@ -3,12 +3,35 @@ import type { CookieManager, CookieOptions } from '../managers/cookie-manager';
 type Ctor = typeof CookieAdapter;
 type CtorParams = ConstructorParameters<Ctor>;
 export type CookieAdapterCtor<T extends CookieAdapter<any>> = new (...args: CtorParams) => T;
+/**
+ * Adapter between cookie value and some data structure
+ *
+ * @export
+ * @class CookieAdapter
+ * @template D
+ */
 export class CookieAdapter<D = string> {
+    /**
+     * Convert data with type `D` to cookie value
+     *
+     * @static
+     * @param {unknown} value Data
+     * @returns {*}  {string}
+     * @memberof CookieAdapter
+     */
     public static serialize(value: unknown): string {
         return typeof value === 'object'
             ? JSON.stringify(value)
             : value?.toString() || '';
     }
+    /**
+     * Convert cookie value to data with type `D`
+     *
+     * @static
+     * @param {string} serializedValue Cookie value
+     * @returns {*}  {*}
+     * @memberof CookieAdapter
+     */
     public static parse(serializedValue: string): any {
         try {
             const obj: any = JSON.parse(serializedValue);

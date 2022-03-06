@@ -146,7 +146,7 @@ Mediator between cookies and adapters.
 
 ### [`CookieAdapter<T>`](src/lib/adapters/cookie-adapter.ts)
 Adapter for cookie, that keep value of some type (default - string).
-You can create it with [`CookieManager#getAdapter`](), or by `new ...`  (in this case don't forget `CookieAdapter#setManager`()). By defalut implementented `CookieJSONAdapter<D>`() and `CookieTextAdapter`().  
+You can create it with `CookieManager#getAdapter`, or by `new ...`  (in this case don't forget `CookieAdapter#setManager`. By defalut implementented `CookieJSONAdapter<D>` and `CookieTextAdapter`.  
 Example of implementing adapter:
 
 ```
