@@ -46,7 +46,7 @@ export class CookieAdapter<D = string> {
     public get serializedValue(): string {
         return (this.constructor as Ctor).serialize(this.value) || '';
     };
-    protected value: D = null;
+    public value: D = null;
     protected manager?: CookieManager;
 
     constructor(name: string, manager?: CookieManager) {

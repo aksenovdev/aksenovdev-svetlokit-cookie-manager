@@ -1,6 +1,6 @@
 {
   "name": "@svetlokit/cookie-manager",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Cookie manager for SvelteKit",
   "repository": {
     "type": "git",

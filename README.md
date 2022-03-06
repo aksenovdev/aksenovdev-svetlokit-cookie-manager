@@ -223,7 +223,7 @@ public static parse(serializedValue: string): Date {
 | public readonly name: string | Name of cookie |
 | public initialValue?: string | Initial cookie value on adapter create moment |
 | public get serializedValue(): string | Serialized current adapter value |
-| protected value: D = null | Current adapter value |
+| public value: D = null | Current adapter value |
 | protected manager?: CookieManager | Manager, that gives initial value and saves updated value of this adapter |
 
 <br> 
